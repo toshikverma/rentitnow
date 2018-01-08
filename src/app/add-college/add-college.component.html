@@ -1,0 +1,29 @@
+<table ><tr><td><input
+(keyup.enter)="addCollege(collegeName,cityID)" #collegeName
+type="text" class="form-control"></td>
+<td>
+  <select #cityID ng-change="loadColleges()"  [ngModel]="selectedItem" (ngModelChange)="loadColleges(cityID.value)">
+<option  *ngFor="let city of cities;let i = index;"
+value="{{city._id}}">{{city.name}}</option>
+
+
+  </select>
+  </td>
+  <td><button (click)="addCollege(collegeName,cityID)" class="btn btn-primary">Add</button>
+</td></tr>
+<tr *ngIf="gotError"><td><alert type="danger">
+  <strong>Oh snap!</strong> {{ errorValue }}
+</alert></td></tr></table>
+<ul class="list-group" style="margin-left: 195px;">
+  <li 
+  *ngFor="let post of posts;let i = index;"
+  class="list-group-item">
+{{i+1}} {{post.name}}
+<button 
+(click)="updateCollege(post,collegeName,cityID.value)"
+class="btn btn-warning btn-sm">Update</button>
+<button 
+(click)="deleteCollege(post)"
+class="btn btn-danger btn-sm">Delete</button>
+</li>
+</ul>

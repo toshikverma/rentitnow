@@ -1,0 +1,19 @@
+<table ><tr><td><input
+(keyup.enter)="addUser(userName)" #userName
+type="text" class="form-control" placeholder="Search by email"></td><td><button (click)="addUser(userName)" class="btn btn-primary">Search</button></td></tr>
+<tr *ngIf="gotError"><td><alert type="danger">
+  <strong>Oh snap!</strong> {{ errorValue }}
+</alert></td></tr></table>
+<ul class="list-group" style="margin-left: 195px;">
+  <li 
+  *ngFor="let post of posts;let i = index;" 
+  class="list-group-item">
+{{i+1}}) <b>{{post.fname}} {{post.lname}}</b> <span style="color:blue">{{post.email}}</span>
+<button *ngIf="post.userType==0"
+(click)="updateUser(post)"
+class="btn btn-warning btn-sm">Promote</button>
+<button *ngIf="post.userType==2"
+(click)="deleteUser(post)"
+class="btn btn-danger btn-sm">Demote</button>
+</li>
+</ul>

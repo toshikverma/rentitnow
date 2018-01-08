@@ -1,0 +1,45 @@
+<div *ngIf="registerTrue"><form #f="ngForm" (ngSubmit)="addUser(f.value);">
+                                                    <div class="form-group">
+                                                      <table >
+                                                        <tr><td *ngIf="gotError" > 
+                                                        <alert type="danger">
+                                                        <strong>Oh snap!</strong> {{ errorValue }}
+                                                        </alert>  
+                                                        </td></tr><tr><td>
+                                                        <label for="name">First Name:</label>
+                                                        <input type="text" class="form-control" ngModel id="name" placeholder="Enter your first name" name="fname">
+                                                        </td>
+                                                        <td style="padding:11px">
+                                                        <label for="name">Last Name:</label>
+                                                        <input type="text" class="form-control" ngModel id="name" placeholder="Enter your last name" name="lname">
+                                                        </td></tr></table>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="newemail">Email:</label>
+                                                        <input type="email" class="form-control" ngModel style="width:50%" id="newemail" placeholder="Enter email" name="email">
+                                                    </div>
+                                          
+                                                    <div class="form-group">
+                                                      <table ><tr><td>
+                                                        <label for="name">Select City:</label>
+                                                        <select class="form-control nav" #cityID  name="city"  [ngModel]="selectedItem" (ngModelChange)="loadColleges(cityID.value)">
+                                                       
+                                                        <option  *ngFor="let city of cities;"
+                                                        value="{{city._id}}">{{city.name}}</option>
+                                                        </select>
+                                                        </td>
+                                                        <td style="padding:11px">
+                                                        <label for="name">Select College:</label>
+                                                        <select class="form-control nav" #collegeID name="college"   [ngModel]="selectedItem">
+                                                         
+                                                        <option  *ngFor="let college of posts;let i = index;"
+                                                        value="{{college._id}}">{{college.name}}</option>
+                                                        </select>
+                                                        </td></tr></table>
+                                                    </div>
+                                                     <div class="form-group">
+                                                        <label for="newpwd">Password:</label>
+                                                        <input type="password" class="form-control" ngModel  style="width:50%" id="newpwd" placeholder="New password" name="password">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-success">Register</button>
+                                                </form></div><div  *ngIf="!registerTrue">Thank you for Registration Please Verify Email to login!</div>

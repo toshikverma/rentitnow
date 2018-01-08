@@ -1,0 +1,19 @@
+<table ><tr><td><input
+(keyup.enter)="addReasons(reasonsName)" #reasonsName
+type="text" class="form-control"></td><td><button (click)="addReasons(reasonsName)" class="btn btn-primary">Add</button></td></tr>
+<tr *ngIf="gotError"><td><alert type="danger">
+  <strong>Oh snap!</strong> {{ errorValue }}
+</alert></td></tr></table>
+<ul class="list-group" style="margin-left:  195px;">
+  <li 
+  *ngFor="let post of posts;let i = index;"
+  class="list-group-item">
+{{i+1}} {{post.name}}
+<button 
+(click)="updateReasons(post,reasonsName)"
+class="btn btn-warning btn-sm">Update</button>
+<button 
+(click)="deleteReasons(post)"
+class="btn btn-danger btn-sm">Delete</button>
+</li>
+</ul>

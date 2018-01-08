@@ -1,0 +1,50 @@
+	<div class="tabbable tabs-left">
+				<ul class="nav nav-tabs">
+					<li [class.active]="activeTabNumber==1" (click)="changeActive(1)"><a href="javascript:void(0)" data-toggle="tab">Add/Edit City</a></li>
+					<li [class.active]="activeTabNumber==2" (click)="changeActive(2)"><a href="javascript:void(0)" data-toggle="tab">Add/Edit College</a></li>
+					<li [class.active]="activeTabNumber==3" (click)="changeActive(3)"><a href="javascript:void(0)" data-toggle="tab">Reject Reasons</a></li>
+					<li [class.active]="activeTabNumber==4" (click)="changeActive(4)"><a href="javascript:void(0)" data-toggle="tab">Promote demote Users</a></li>
+					<li [class.active]="activeTabNumber==5" (click)="changeActive(5)"><a href="javascript:void(0)" data-toggle="tab">Add/Edit Category</a></li>
+					<li [class.active]="activeTabNumber==6" (click)="changeActive(6)"><a href="javascript:void(0)" data-toggle="tab">Add/Edit Sub  Category</a></li>
+				</ul>
+				<div class="tab-content">
+					<div *ngIf="activeTabNumber==1" [class.active]="activeTabNumber==1"  class="tab-pane active" id="home">                
+						<div class="">
+							<h1>Add or Edit City</h1>
+							<app-add-city></app-add-city>
+              </div>
+					</div> 
+					<div *ngIf="activeTabNumber==2" [class.active]="activeTabNumber==2"  class="tab-pane" id="about"> 
+						<div class="">
+							<h1>Add or Edit College</h1>
+							<app-add-college></app-add-college>
+							</div>
+					</div>
+				
+					<div *ngIf="activeTabNumber==3" [class.active]="activeTabNumber==3"  class="tab-pane" id="services"> 
+						<div class="">
+							<h1>Add or edit Reject Reasons</h1>
+							<app-add-reasons></app-add-reasons>
+							</div>
+					</div>
+				
+					<div *ngIf="activeTabNumber==4" [class.active]="activeTabNumber==4"  class="tab-pane" id="contact"> 
+						 <div class="">
+							<h1>Promote demote Users</h1>
+							<app-edit-user></app-edit-user>
+							</div>
+					</div>
+					<div *ngIf="activeTabNumber==5" [class.active]="activeTabNumber==5"  class="tab-pane" id="contact"> 
+						 <div class="">
+							<h1>Add or Edit Category</h1>
+							<app-add-category></app-add-category>
+							</div>
+					</div>
+					<div *ngIf="activeTabNumber==6" [class.active]="activeTabNumber==6"  class="tab-pane" id="contact"> 
+						 <div class="">
+							<h1>Add or Edit Sub Category</h1>
+							<app-add-sub-category></app-add-sub-category>
+							</div>
+					</div>
+				</div>
+			</div>
