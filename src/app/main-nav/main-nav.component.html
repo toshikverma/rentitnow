@@ -69,7 +69,11 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="tab-content">
+                                          
                                             <div *ngIf="initialLogin" id="login-form" class="tab-pane fade in active">
+                                              <div *ngIf="gotError"><alert type="danger">
+                                                        <strong>Oh snap!</strong> {{ errorValue }}
+                                                        </alert> </div>
                                                <form #f="ngForm" (ngSubmit)="logIn(f.value);" >
                                                     <div class="form-group">
                                                         <label for="email">Email:</label>

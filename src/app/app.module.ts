@@ -33,6 +33,8 @@ import { AuthGaurd } from "./services/auth-gaurd.service";
 import { AdminAuthGaurd } from "./services/admin-auth-gaurd.service";
 import { RegistrationComponent } from './registration/registration.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AddProductComponent } from './profileWorks/add-product/add-product.component';
+import { ProductService } from "./services/product.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,8 @@ import { ProfileComponent } from './profile/profile.component';
     AddCategoryComponent,
     AddSubCategoryComponent,
     RegistrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddProductComponent
   ],
   imports: [HttpModule,
     HttpClientModule,
@@ -65,7 +68,7 @@ import { ProfileComponent } from './profile/profile.component';
       { path: '**', component: NotFoundComponent }
     ])
   ],
-  providers: [AdminAuthGaurd,AuthGaurd,SubCategoryService,CategoryService,UserService,ReasonsService,CollegeService,CityService,DataService,AuthService,{
+  providers: [ProductService,AdminAuthGaurd,AuthGaurd,SubCategoryService,CategoryService,UserService,ReasonsService,CollegeService,CityService,DataService,AuthService,{
     provide: ErrorHandler, 
     useClass: AppErrorHandler
   }],

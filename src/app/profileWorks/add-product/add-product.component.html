@@ -1,0 +1,168 @@
+<div class="container-fluid advertise-bg">
+		<div class="add-b0x">
+			<div class="col-sm-9 col-md-9 ad-contact-us">
+				<div class="panel panel-default">
+					<div class="panel-body">
+            
+						<form #f="ngForm" (ngSubmit)="saveProduct(f.value);">
+							<div class="col-md-6">
+								<label class="control-label">Name Of Product</label>
+								<div class="form-group">
+									<div class="inputGroupContainer">
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-pencil"></i>
+											</span>
+											<input  name="productName" ngModel placeholder="Name Of Product" class="form-control"  type="text">
+											</div>
+										</div>
+									</div>
+								</div>
+                            <div class="col-md-6">
+                                <label class="control-label">Age Of The Product </label>
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </span>
+                                            <input ngModel name="productAge" placeholder="Age Of The Product in Days" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Condition Of The Product </label>
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-signal"></i>
+                                            </span>
+                                            <select class="form-control" name="condition" ngModel>
+                                                <option value="">Select Condition Of The Product</option>
+                                                <option value="1">Okay</option>
+                                                <option value="2">Good</option>
+                                                <option value="3">Better</option>
+                                                <option value="4">Best</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label"> Rent Price</label>
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group textprice">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-inr fa-2x" aria-hidden="true"></i>
+                                            </span>
+                                            <div class="col-md-6 col-sm-6 col-xs-6 pd-min">
+                                                <input ngModel name="rentPerAmount" placeholder="Rent Price" class="form-control" type="text">
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 pd-min">
+                                                    <select ngModel class="form-control radious" name="rentTimeType">
+                                                        <option value="">Select Rent Price</option>
+                                                        <option value="1">Per Day</option>
+                                                        <option value="2">Per Week</option>
+                                                        <option value="3">Per Month</option>
+                                                        <option value="4">Per Hour</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-md-6">
+                                <label class="control-label"> Security Deposit</label>
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
+                                            </span>
+                                            <select ngModel #doSecurity (ngModelChange)="isSecurityChange(doSecurity.value)" class="form-control" name="isSecurityAmount" id="Security_Deposit">
+                                                <option value="">Select Security Deposit</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  class="col-md-6">
+                                <label class="control-label"> Upload Images</label>
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-file"></i>
+                                            </span>
+                                            <input  name="userfile" placeholder="Upload Images" class="form-control"  type="file" multiple>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div *ngIf="isSecurity==1" class="col-md-6" >
+                                <label class="control-label"> Security Deposit Value/Mortgage</label>
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calculator fa-2x" aria-hidden="true"></i>
+                                            </span>
+                                            <input ngModel  name="securityAmount" placeholder="Security Deposit Value/Mortgage" class="form-control"  type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Reference Link</label>
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-link fa-2x" aria-hidden="true"></i>
+                                            </span>
+                                            <input  ngModel name="referenceLink" placeholder="Reference Link" class="form-control"  type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-md-12">
+                                <label class="control-label">Product Description </label>
+                                <div class="form-group">
+                                    <textarea ngModel  class="form-control" rows="2" id="comment" placeholder="Product Description" name="description"></textarea>
+                                </div>
+                            </div>
+												
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                        <p>*We advise you to always take a security deposit in terms of currency or a mortgage before renting out</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                      <alert *ngIf="gotError" type="danger">
+  <strong>Oh snap!</strong> {{ errorValue }}
+</alert>
+                                        <button type="submit" class="btn btn-warning newbtn " name="submit" >Send 
+                                            <span class="glyphicon glyphicon-send"></span>
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 advertise-sb-heading">
+                <img src="/assets/images/advertisement-banner1.jpg" alt="partner-bg">
+                </div>
+        </div>
+    </div>

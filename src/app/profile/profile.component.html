@@ -11,7 +11,7 @@
     <li role="presentation" [class.active]="activeTabNumber==3" (click)="changeActive(3)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-user"></i><span class="link-lable"> Profile</span></a></li>
 	
     <li role="presentation" [class.active]="activeTabNumber==4" (click)="changeActive(4)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-pencil"></i><span class="link-lable"> Edit Profile</span></a></li>
-    <li role="presentation" [class.active]="activeTabNumber==5" (click)="changeActive(5)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-download"></i><span class="link-lable"> Add Product</span></a></li>
+    <li role="presentation" [class.active]="activeTabNumber==5" (click)="changeActive(5)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-download"></i><span class="link-lable">Add Item For Rent</span></a></li>
     <li role="presentation" [class.active]="activeTabNumber==6" (click)="changeActive(6)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i><span class="link-lable"> Add Request</span></a></li>
   </ul>
 
@@ -27,8 +27,8 @@
   <div role="tabpanel"  *ngIf="activeTabNumber==4" id="test5"><h2>Tab 4</h2>
  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>
 
-<div role="tabpanel"  *ngIf="activeTabNumber==5" id="test5"><h2>Tab 5</h2>
- <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>
+<div role="tabpanel"  *ngIf="activeTabNumber==5" id="test5"><h2>Add Item For Rent</h2>
+   <app-add-product></app-add-product></div>
 
 <div role="tabpanel"  *ngIf="activeTabNumber==6" id="test5"><h2>Tab 6</h2>
  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>

@@ -8,7 +8,9 @@ import { JwtHelper } from "angular2-jwt";
   styleUrls: ['./main-nav.component.scss']
 })
 export class MainNavComponent implements OnInit {
- private  invalidLogin: boolean;
+  errorValue: any;
+  gotError: boolean;
+  private invalidLogin: boolean;
   private initialLogin: boolean;
   private temp:String[];
   constructor(private auth:AuthService,
@@ -16,6 +18,7 @@ export class MainNavComponent implements OnInit {
 
   ngOnInit() {
 this.initialLogin=true;
+this.gotError=false;
  }
 
 status: { isopen: boolean } = { isopen: false };
@@ -38,6 +41,18 @@ status: { isopen: boolean } = { isopen: false };
 }
 
 logIn(credentials) {
+  this.gotError=false;
+  if(credentials.email=="" || credentials.email==undefined || credentials.email==null || !(this.validateEmail(credentials.email))){
+ this.gotError=true;
+ this.errorValue="Email is empty or not Valid!"; 
+ return false;
+}
+
+  if(credentials.password=="" || credentials.password==undefined || credentials.password==null ){
+ this.gotError=true;
+ this.errorValue="Password cannot empty!";
+ return false; 
+}
   console.log(credentials);
    this.invalidLogin = false;
     this.auth.addLogin(credentials)
@@ -56,7 +71,9 @@ logIn(credentials) {
       },
       error=>{
       console.log(error);
-      this.invalidLogin = true; 
+      this.invalidLogin = true;
+      this.gotError=true; 
+      this.errorValue=error.error.message;
       })
   //console.log("am here");
 }
@@ -69,4 +86,8 @@ logIn(credentials) {
     let userDetails=jwthelper.decodeToken(localStorage.getItem('token'));
    this.auth.logout(userDetails.email,userDetails.token);
   }
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email.toLowerCase());
+}
 }
