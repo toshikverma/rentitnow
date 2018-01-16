@@ -6,6 +6,7 @@
 					<li [class.active]="activeTabNumber==4" (click)="changeActive(4)"><a href="javascript:void(0)" data-toggle="tab">Promote demote Users</a></li>
 					<li [class.active]="activeTabNumber==5" (click)="changeActive(5)"><a href="javascript:void(0)" data-toggle="tab">Add/Edit Category</a></li>
 					<li [class.active]="activeTabNumber==6" (click)="changeActive(6)"><a href="javascript:void(0)" data-toggle="tab">Add/Edit Sub  Category</a></li>
+					<li [class.active]="activeTabNumber==7" (click)="changeActive(7)"><a href="javascript:void(0)" data-toggle="tab">Approve Products</a></li>
 				</ul>
 				<div class="tab-content">
 					<div *ngIf="activeTabNumber==1" [class.active]="activeTabNumber==1"  class="tab-pane active" id="home">                
@@ -44,6 +45,12 @@
 						 <div class="">
 							<h1>Add or Edit Sub Category</h1>
 							<app-add-sub-category></app-add-sub-category>
+							</div>
+					</div>
+					<div *ngIf="activeTabNumber==7" [class.active]="activeTabNumber==7"  class="tab-pane" id="contact"> 
+						 <div class="">
+							<h1>Approve Products</h1>
+							<app-approve-products></app-approve-products>
 							</div>
 					</div>
 				</div>

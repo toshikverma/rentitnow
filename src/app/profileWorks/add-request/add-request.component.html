@@ -1,0 +1,109 @@
+<div class="mrgn-ad-section">
+<div class="container-fluid advertise-bg">
+<div class="add-b0x">
+<div class="col-sm-9 col-md-9 ad-contact-us">
+    <div class="panel panel-default">
+              <div class="panel-body">
+              <form #f="ngForm" (ngSubmit)="saveRequest(f.value);">
+              <fieldset>
+              <div class="col-md-12">
+              <label class="control-label">Name Of Product</label>
+                <div class="form-group">
+                  <div class="inputGroupContainer">
+                    <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                      <input  name="requestName" ngModel placeholder="Name Of Product" class="form-control"  type="text">
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="col-md-6">
+                <label class="control-label">From Date</label>
+                <div class="form-group">
+                  <div class="inputGroupContainer">
+                    <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                      <p-calendar name="fromDate" [(ngModel)]="value1" class="form-control" [showIcon]="true"></p-calendar>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="col-md-6">
+                <label class="control-label"> To Date</label>
+                <div class="form-group">
+                  <div class="inputGroupContainer">
+                    <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                      <p-calendar name="toDate" [(ngModel)]="value2" class="form-control" [showIcon]="true"></p-calendar>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div  class="col-md-12">
+                                <label class="control-label"> Upload Images(Max 4)</label>
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-file"></i>
+                                            </span>
+                                           <image-upload 
+                                              [max]="4"
+                                              [url]="'https://rentophila.herokuapp.com/v1/imageUpload'"
+                                              [headers]="{Authorization: 'MyToken'}"
+                                              [extensions]="['jpg','png']"
+                                              (uploadFinished)="onUploadFinished($event)"
+                                              (removed)="onRemoved($event)"
+                                              (uploadStateChanged)="onUploadStateChanged($event)"
+                                              >
+                                           </image-upload>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                <div class="col-md-6">
+                <label class="control-label">Reference Link</label>
+                <div class="form-group">
+                  <div class="inputGroupContainer">
+                    <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-link"></i></span>
+                      <input  name="referenceLink" ngModel placeholder="Reference Link" class="form-control"  type="text">
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="col-md-12">
+                                <label class="control-label">Product Description </label>
+                                <div class="form-group">
+                                    <textarea name="description" ngModel class="form-control" rows="2" id="comment" placeholder="Product Description"></textarea>
+                                </div>
+                            </div>
+                <div class="col-md-12">
+                <div class="form-group">
+                  <div class="inputGroupContainer">
+                    <p>*We advice you to read the renter terms completely and check the product carefully before renting</p>
+                  </div>
+                </div>
+                </div>
+                <div class="col-md-12">
+                <div class="form-group">
+                  <div class="inputGroupContainer">
+                    <alert *ngIf="gotError" type="danger">
+  <strong>Oh snap!</strong> {{ errorValue }}
+</alert>
+                    <button type="submit" class="btn btn-warning newbtn " name="submit" >Send <span class="glyphicon glyphicon-send"></span></button>
+                  </div>
+                </div>
+                </div>
+              </fieldset>
+            </form>
+              
+            </div>
+            
+            </div>
+</div>
+<div class="col-sm-3 col-md-3 advertise-sb-heading">
+  <div class="">
+  <img src="/assets/images/advertisement-banner2.jpg" alt="partner-bg">
+  </div>
+   
+      </div>
+
+</div>
+</div>

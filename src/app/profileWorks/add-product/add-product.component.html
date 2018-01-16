@@ -91,19 +91,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div  class="col-md-6">
-                                <label class="control-label"> Upload Images</label>
-                                <div class="form-group">
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-file"></i>
-                                            </span>
-                                            <input  name="userfile" placeholder="Upload Images" class="form-control"  type="file" multiple>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             <div *ngIf="isSecurity==1" class="col-md-6" >
                                 <label class="control-label"> Security Deposit Value/Mortgage</label>
                                 <div class="form-group">
@@ -117,6 +104,29 @@
                                         </div>
                                     </div>
                                 </div>
+                            <div  class="col-md-12">
+                                <label class="control-label"> Upload Images(Max 4)</label>
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-file"></i>
+                                            </span>
+                                           <image-upload 
+                                              [max]="4"
+                                              [url]="'https://rentophila.herokuapp.com/v1/imageUpload'"
+                                              [headers]="{Authorization: 'MyToken'}"
+                                              [extensions]="['jpg','png']"
+                                              (uploadFinished)="onUploadFinished($event)"
+                                              (removed)="onRemoved($event)"
+                                              (uploadStateChanged)="onUploadStateChanged($event)"
+                                              >
+                                           </image-upload>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
                             <div class="col-md-6">
                                 <label class="control-label">Reference Link</label>
                                 <div class="form-group">

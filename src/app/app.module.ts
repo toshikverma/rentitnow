@@ -35,6 +35,14 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AddProductComponent } from './profileWorks/add-product/add-product.component';
 import { ProductService } from "./services/product.service";
+import { ImageUploadModule } from "angular2-image-upload";
+import { ImageService } from "./services/image.service";
+import { AddRequestComponent } from './profileWorks/add-request/add-request.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { CalendarModule} from 'primeng/primeng';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import {ReqService } from "./services/request.service";
+import { ApproveProductsComponent } from './approve-products/approve-products.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,12 +60,18 @@ import { ProductService } from "./services/product.service";
     AddSubCategoryComponent,
     RegistrationComponent,
     ProfileComponent,
-    AddProductComponent
+    AddProductComponent,
+    AddRequestComponent,
+    ApproveProductsComponent
   ],
   imports: [HttpModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
     BrowserModule,
+    AngularFontAwesomeModule,
+    CalendarModule,
+    ImageUploadModule.forRoot(),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     BsDropdownModule.forRoot(),
@@ -68,7 +82,7 @@ import { ProductService } from "./services/product.service";
       { path: '**', component: NotFoundComponent }
     ])
   ],
-  providers: [ProductService,AdminAuthGaurd,AuthGaurd,SubCategoryService,CategoryService,UserService,ReasonsService,CollegeService,CityService,DataService,AuthService,{
+  providers: [ReqService,ImageService,ProductService,AdminAuthGaurd,AuthGaurd,SubCategoryService,CategoryService,UserService,ReasonsService,CollegeService,CityService,DataService,AuthService,{
     provide: ErrorHandler, 
     useClass: AppErrorHandler
   }],

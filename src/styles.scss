@@ -1,3 +1,5 @@
+@import '../node_modules/primeng/resources/themes/omega/theme.css';
+
 @font-face {
   font-family: 'icogo';
   src:  url('/assets/fonts/icogo.eot?7ub3r9');
@@ -1288,21 +1290,6 @@ input[type="checkbox"] {
     margin: 10px 0px 2px 0px;
 	color:#fff;
 	margin-right:5px;
-}
-.btn-warning:active:hover{
-	color: #fff;
-    background-color: #48b0cb;
-    border-color: #2b90ab;
-}
-.btn-warning{
-	color: #fff;
-    background-color: #48b0cb;
-    border-color: #2b90ab;
-}
-.btn-warning:hover{
-	color: #fff;
-    background-color: #48b0cb;
-    border-color: #2b90ab;
 }
 .form-box{
 	border: 1px solid #ddd;}

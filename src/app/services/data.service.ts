@@ -17,6 +17,12 @@ export class DataService {
       .map(response => response.json())
       .catch(this.handleError);
   }
+    customQuery(query) {
+      console.log(this.url+"/dynamic/"+query);
+    return this.http.get(this.url+"/dynamic/"+query)
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
 search(obj) {
     return this.http.post(this.url+"/search",obj)
       .map(response => response.json())
@@ -54,6 +60,21 @@ search(obj) {
     return this.http.post(this.url+"/add",obj)
       .map(response => response.json())
       .catch(this.handleError);
+  }
+  deleteImage(obj) {
+    return this.http.post(this.url+"/delete",obj);
+  }
+  approveImage(obj){
+    return this.http.put(this.url+"/approveimages/"+obj._id,obj);
+  }
+  rejectImage(obj){
+    return this.http.put(this.url+"/rejectimages/"+obj._id,obj);
+  }
+  approveLink(obj){
+    return this.http.put(this.url+"/approvelink/"+obj._id,obj);
+  }
+  rejectLink(obj){
+    return this.http.put(this.url+"/rejectlink/"+obj._id,obj);
   }
   private handleError(error: Response) {
     if (error.status === 400)
