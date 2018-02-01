@@ -1,11 +1,12 @@
+
 <ngx-loading-bar></ngx-loading-bar>
- <div col-md-12> 
+ <div col-md-12>
                                 <table class="table table-bordered admin-table">
                        		    	<thead>
                                       <tr>
                                         <th>S.No.</th>
                                         <th>Username</th>
-                                        <th>Name Of The Product</th>
+                                        <th>Name Of The Request</th>
                   
                                       
                                         <th>Assign Category</th>
@@ -19,9 +20,9 @@
     								
   									<tbody>
                                   <tr *ngFor ="let post of posts;let i=index;">
-                                    <td class="col-md-1"> {{(gotPageNumber-1)*12+i+1}} </td>
+                                    <td class="col-md-1"> {{i+1}} </td>
                                     <td class="col-md-1"> {{post.userName}}</td>
-                                    <td class="col-md-4">  {{post.productName}}</td>
+                                    <td class="col-md-4">  {{post.requestName}}</td>
                                    
                                     <td> <select #categoryID   [ngModel]="post.category" (ngModelChange)="loadSubCategories(post,categoryID.value,i)">
 
@@ -31,9 +32,9 @@ value="{{category._id}}" >{{category.name}}</option>
 
   </select></td>
                                     <td class="col-md-1">
-                                      <button *ngIf="!subcategories[i] && post.subcategory" type="button"  (click)="loadSubCategories(post,categoryID.value,i)" class="btn btn-info btn-sm" data-toggle="tooltip" title="Edit Post">Get</button>
-                                      <select #subcategoryID *ngIf="subcategories[i]" #subCategoryID [ngModel]="post.subcategory" (ngModelChange)="changeSubCategories(post,subcategoryID.value)">
-                                        
+                                      <button *ngIf="!subcategories[i] && post.subCategory" type="button"  (click)="loadSubCategories(post,categoryID.value,i)" class="btn btn-info btn-sm" data-toggle="tooltip" title="Edit Post">Get</button>
+                                      <select #subcategoryID *ngIf="subcategories[i]" #subCategoryID [ngModel]="post.subCategory" (ngModelChange)="changeSubCategories(post,subcategoryID.value)">
+                                        <option>Select SubCategory</option>
 <option  *ngFor="let subcategory of subcategories[i];"
 value="{{subcategory._id}}">{{subcategory.name}}</option>
 
@@ -64,7 +65,7 @@ value="{{subcategory._id}}">{{subcategory.name}}</option>
                                   </tr>
     						</tbody>
                             </table>
-                            <app-pagination *ngIf="gotPageNumber" [pageNumber]="gotPageNumber" [totalPages]="gotTotalPages" (callPageChange)="changePage($event)"></app-pagination>
+                             <app-pagination *ngIf="gotPageNumber" [pageNumber]="gotPageNumber" [totalPages]="gotTotalPages" (callPageChange)="changePage($event)"></app-pagination>
                             </div>
                            <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -77,7 +78,7 @@ value="{{subcategory._id}}">{{subcategory.name}}</option>
       </div>
       <div class="modal-body">
       
-                                    <div class="modal-body">
+                                   <div class="modal-body">
                                       
                                       <div  *ngIf="image1!='noimagefound'">
                                         <h3>Image 1</h3>
@@ -111,7 +112,7 @@ value="{{subcategory._id}}">{{subcategory.name}}</option>
         </button>
       </div>
       <div class="modal-body">
-      <app-edit-product [productId]="prodId" (saveDone)="hideModal()" #child ></app-edit-product>
+      <app-edit-request [productId]="prodId" (saveDone)="hideModal()" #child ></app-edit-request>
                                     
       </div>
     </div>
@@ -144,5 +145,4 @@ value="{{subcategory._id}}">{{subcategory.name}}</option>
             </form>
     </div>
   </div></div>
-  
  

@@ -12,7 +12,7 @@ export class AdminAuthGaurd implements CanActivate {
     this.userDetails= this.jwtHelper.decodeToken(localStorage.getItem("token"));
     if(this.userDetails.userType==3)
     return true;
-    this.router.navigate(['/']);
+    this.router.navigate(['/accessdenied']);
     return false;
   }
 

@@ -1,36 +1,18 @@
-import {
-    Component,
-    OnInit,
-    ViewChild
-} from '@angular/core';
-import {
-    ProductService
-} from "../services/product.service";
-import {
-    JwtHelper
-} from "angular2-jwt/angular2-jwt";
-import {
-    DomSanitizer
-} from '@angular/platform-browser';
-import {
-    CategoryService
-} from "../services/category.service";
-import {
-    SubCategoryService
-} from "../services/sub-category.service";
-import {
-    ModalDirective
-} from 'ngx-bootstrap/modal';
-import {
-    ReasonsService
-} from "../services/reasons.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { JwtHelper } from "angular2-jwt/angular2-jwt";
+import { ModalDirective } from "ngx-bootstrap/modal";
+import { ProductService } from "../services/product.service";
+import { ReasonsService } from "../services/reasons.service";
+import { CategoryService } from "../services/category.service";
+import { SubCategoryService } from "../services/sub-category.service";
+import { ReqService } from "../services/request.service";
 import { LoadingBarService } from '@ngx-loading-bar/core';
 @Component({
-    selector: 'app-approve-products',
-    templateUrl: './approve-products.component.html',
-    styleUrls: ['./approve-products.component.scss']
+  selector: 'app-approve-request',
+  templateUrl: './approve-request.component.html',
+  styleUrls: ['./approve-request.component.scss']
 })
-export class ApproveProductsComponent implements OnInit {
+export class ApproveRequestComponent implements OnInit {
     rejectIndex: number;
     reasonsArray: any;
     @ViewChild('child') child;
@@ -48,26 +30,29 @@ export class ApproveProductsComponent implements OnInit {
     userDetails: any;
     jwtHelper: JwtHelper;
     posts: Array < any > = [];
-    pageN:any;
-    gotPageNumber:number;
+ gotPageNumber:number;
     gotTotalPages:number;
-    constructor(private loadingBar: LoadingBarService,private products: ProductService, private reasons: ReasonsService, private category: CategoryService, private subcat: SubCategoryService) {}
+    constructor(private loadingBar: LoadingBarService,private products: ReqService, private reasons: ReasonsService, private category: CategoryService, private subcat: SubCategoryService) {}
 
     ngOnInit() {
-        this.loadingBar.start();
+         this.loadingBar.start();
         this.category.getAll(this.obj).subscribe(response => {
             this.categories = response.categories;
         });
         this.jwtHelper = new JwtHelper();
         this.userDetails = this.jwtHelper.decodeToken(localStorage.getItem("token"));
-        this.products.customQuery(this.userDetails.token + '/%7B %7D/lastEdit/1').subscribe(response => {
-            this.posts = response.products;
-           // console.log(response);
-            this.gotPageNumber=response.page;
+        this.products.customQuery(this.userDetails.token + '/%7B %7D/date/1').subscribe(response => {
+            this.posts = response.requests;
+             this.gotPageNumber=response.page;
             this.gotTotalPages=response.total_pages;
             this.loadingBar.complete();
+            this.posts.forEach(function (value) {
+    value.fromDate=new Date(value.fromDate);
+    value.toDate=new Date(value.toDate);
+});
         });
         this.reasons.getAll({}).subscribe(response => {
+          console.log(response)
             this.reasonsArray = response.cities;
         });
     }
@@ -79,7 +64,7 @@ export class ApproveProductsComponent implements OnInit {
 
     }
     setLink(link) {
-       // console.log(link);
+        console.log(link);
         this.linkAddress = link;
     }
     approveImage(obj) {
@@ -142,7 +127,6 @@ export class ApproveProductsComponent implements OnInit {
     changeSubCategories(post, id) {
 
         if (id == null || id == undefined || id == "") {} else {
-            console.log(id)
             this.products.assignsubcategory({
                 _id: post._id,
                 email: this.userDetails.email,
@@ -158,6 +142,7 @@ export class ApproveProductsComponent implements OnInit {
         this.prodId = id;
     }
     clearingOldImages() {
+        console.log("from PArent");
         this.child.deleteAndClear();
         this.child.imageArray = [];
         this.child.gotError = false;
@@ -215,7 +200,7 @@ export class ApproveProductsComponent implements OnInit {
         }
 
     }
-      imageName(original_name){
+       imageName(original_name){
          if(original_name!="noimagefound" && original_name!="" && original_name!=undefined ){
 var fileExt = original_name.split('.').pop();
 original_name=original_name.substr(0,original_name.length- fileExt.length);
@@ -224,7 +209,7 @@ return original_name;
          }
          return original_name;
     }
-    changePage(n:number){
+   changePage(n:number){
        this.loadingBar.start();
         console.log("parent : "+n);
         this.products.customQuery(this.userDetails.token + '/%7B %7D/lastEdit/'+n).subscribe(response => {

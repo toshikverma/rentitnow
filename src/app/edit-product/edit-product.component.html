@@ -1,10 +1,10 @@
 <div class="container-fluid advertise-bg">
 		<div class="add-b0x">
-			<div class="col-sm-9 col-md-9 ad-contact-us">
+			<div class="col-sm-12 col-md-12 ad-contact-us">
 				<div class="panel panel-default">
 					<div class="panel-body">
             
-						<form #f="ngForm" (ngSubmit)="saveProduct(f.value);">
+						<form *ngIf="productId" #f="ngForm" (ngSubmit)="saveProduct(productId._id,f.value);">
 							<div class="col-md-6">
 								<label class="control-label">Name Of Product</label>
 								<div class="form-group">
@@ -13,7 +13,7 @@
 											<span class="input-group-addon">
 												<i class="glyphicon glyphicon-pencil"></i>
 											</span>
-											<input  name="productName" ngModel placeholder="Name Of Product" class="form-control"  type="text">
+											<input  name="productName" [ngModel]="productId.productName" placeholder="Name Of Product" class="form-control"  type="text">
 											</div>
 										</div>
 									</div>
@@ -26,7 +26,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-calendar"></i>
                                             </span>
-                                            <input ngModel name="productAge" placeholder="Age Of The Product in Days" class="form-control" type="text">
+                                            <input [ngModel]="productId.productAge" name="productAge" placeholder="Age Of The Product in Days" class="form-control" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -39,7 +39,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-signal"></i>
                                             </span>
-                                            <select class="form-control" name="condition" ngModel>
+                                            <select class="form-control" name="condition" [ngModel]="productId.condition">
                                                 <option value="">Select Condition Of The Product</option>
                                                 <option value="1">Okay</option>
                                                 <option value="2">Good</option>
@@ -59,10 +59,10 @@
                                                 <i class="fa fa-inr fa-2x" aria-hidden="true"></i>
                                             </span>
                                             <div class="col-md-6 col-sm-6 col-xs-6 pd-min">
-                                                <input ngModel name="rentPerAmount" placeholder="Rent Price" class="form-control" type="text">
+                                                <input [ngModel]="productId.rentPerAmount" name="rentPerAmount" placeholder="Rent Price" class="form-control" type="text">
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6 pd-min">
-                                                    <select ngModel class="form-control radious" name="rentTimeType">
+                                                    <select [ngModel]="productId.rentTimeType" class="form-control radious" name="rentTimeType">
                                                         <option value="">Select Rent Price</option>
                                                         <option value="1">Per Day</option>
                                                         <option value="2">Per Week</option>
@@ -82,7 +82,7 @@
                                             <span class="input-group-addon">
                                                 <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
                                             </span>
-                                            <select ngModel #doSecurity (ngModelChange)="isSecurityChange(doSecurity.value)" class="form-control" name="isSecurityAmount" id="Security_Deposit">
+                                            <select [ngModel]="productId.isSecurityAmount" #doSecurity (ngModelChange)="isSecurityChange(doSecurity.value)" class="form-control" name="isSecurityAmount" id="Security_Deposit">
                                                 <option value="">Select Security Deposit</option>
                                                 <option value="1">Yes</option>
                                                 <option value="2">No</option>
@@ -99,7 +99,7 @@
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calculator fa-2x" aria-hidden="true"></i>
                                             </span>
-                                            <input ngModel  name="securityAmount" placeholder="Security Deposit Value/Mortgage" class="form-control"  type="text">
+                                            <input [ngModel]="productId.securityAmount"  name="securityAmount" placeholder="Security Deposit Value/Mortgage" class="form-control"  type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -126,7 +126,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            
+                            <div  class="col-md-12">
+                              <div *ngIf="productId.image1!='noimagefound'" [style.background]="'url(https://s3.ap-south-1.amazonaws.com/rentophilaimages/thumbnails/'+image_name(productId.image1)+')'" class="col-md-3" id="panel1" ><a (click)="delImage(1,productId.image1)" id="close" href="javascript:void(0);"></a></div> &nbsp;&nbsp;&nbsp;
+                               <div *ngIf="productId.image2!='noimagefound'" [style.background]="'url(https://s3.ap-south-1.amazonaws.com/rentophilaimages/thumbnails/'+image_name(productId.image2)+')'" class="col-md-3" style="margin-left:2%" id="panel2"><a (click)="delImage(2,productId.image2)" id="close" href="javascript:void(0);"></a></div>&nbsp;&nbsp;&nbsp;
+                                <div *ngIf="productId.image3!='noimagefound'" [style.background]="'url(https://s3.ap-south-1.amazonaws.com/rentophilaimages/thumbnails/'+image_name(productId.image3)+')'" class="col-md-3" style="margin-left:2%" id="panel3"><a (click)="delImage(3,productId.image3)" id="close" href="javascript:void(0);"></a></div>&nbsp;&nbsp;&nbsp;
+                                 <div *ngIf="productId.image4!='noimagefound'" class="col-md-3" [style.background]="'url(https://s3.ap-south-1.amazonaws.com/rentophilaimages/thumbnails/'+image_name(productId.image4)+')'" style="margin-left:2%" id="panel4"><a (click)="delImage(4,productId.image4)" id="close" href="javascript:void(0);"></a></div>&nbsp;&nbsp;&nbsp;
+                            </div>
                             <div class="col-md-6">
                                 <label class="control-label">Reference Link</label>
                                 <div class="form-group">
@@ -135,7 +140,7 @@
                                             <span class="input-group-addon">
                                                 <i class="fa fa-link fa-2x" aria-hidden="true"></i>
                                             </span>
-                                            <input  ngModel name="referenceLink" placeholder="Reference Link" class="form-control"  type="text">
+                                            <input  [ngModel]="productId.referenceLink" name="referenceLink" placeholder="Reference Link" class="form-control"  type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -143,7 +148,7 @@
                             <div class="col-md-12">
                                 <label class="control-label">Product Description </label>
                                 <div class="form-group">
-                                    <textarea ngModel  class="form-control" rows="2" id="comment" placeholder="Product Description" name="description"></textarea>
+                                    <textarea  [ngModel]="productId.productDescription"  class="form-control" rows="2" id="comment" placeholder="Product Description" name="description"></textarea>
                                 </div>
                             </div>
 												
@@ -160,9 +165,8 @@
                                       <alert *ngIf="gotError" type="danger">
   <strong>Oh snap!</strong> {{ errorValue }}
 </alert>
-                                        <button type="submit" class="btn btn-warning newbtn " name="submit"
-                                        [disabled]="saveDiabled"><i *ngIf="saveDiabled"class="fa fa-circle-o-notch fa-spin"></i> Send 
-                                            <span class="glyphicon glyphicon-send"></span>
+                                        <button type="submit" class="btn btn-warning newbtn " name="submit" >Save 
+                                            <span class="fa fa-save"></span>
                                         </button>
                                         
                                     </div>
@@ -172,8 +176,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3 col-md-3 advertise-sb-heading">
-                <img src="/assets/images/advertisement-banner1.jpg" alt="partner-bg">
-                </div>
+            
         </div>
     </div>

@@ -43,6 +43,13 @@ import { CalendarModule} from 'primeng/primeng';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {ReqService } from "./services/request.service";
 import { ApproveProductsComponent } from './approve-products/approve-products.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { ApproveRequestComponent } from './approve-request/approve-request.component';
+import { EditRequestComponent } from './edit-request/edit-request.component';
+import { ManageProductsComponent } from './profileWorks/manage-products/manage-products.component';
+import { ManageRequestsComponent } from './profileWorks/manage-requests/manage-requests.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +69,13 @@ import { ApproveProductsComponent } from './approve-products/approve-products.co
     ProfileComponent,
     AddProductComponent,
     AddRequestComponent,
-    ApproveProductsComponent
+    ApproveProductsComponent,
+    EditProductComponent,
+    ApproveRequestComponent,
+    EditRequestComponent,
+    ManageProductsComponent,
+    ManageRequestsComponent,
+    PaginationComponent
   ],
   imports: [HttpModule,
     HttpClientModule,
@@ -70,6 +83,7 @@ import { ApproveProductsComponent } from './approve-products/approve-products.co
     BrowserAnimationsModule,
     BrowserModule,
     AngularFontAwesomeModule,
+     LoadingBarModule.forRoot(),
     CalendarModule,
     ImageUploadModule.forRoot(),
     ModalModule.forRoot(),
@@ -79,6 +93,7 @@ import { ApproveProductsComponent } from './approve-products/approve-products.co
      { path: '', component: HomeComponent },
       { path: 'admin', component: AdminComponent,canActivate:[AdminAuthGaurd]},
        { path: 'profile', component: ProfileComponent},
+         { path: 'accessdenied', component: NoAccessComponent},
       { path: '**', component: NotFoundComponent }
     ])
   ],

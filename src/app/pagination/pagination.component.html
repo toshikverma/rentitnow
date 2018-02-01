@@ -1,0 +1,16 @@
+<div class="page-nation">
+                                        <ul class="pagination pagination-large">
+                                        <li *ngIf="pageNumber!=1" ><a rel="next" href="javascript:void(0);" (click)="PageNumberChanged(1)">First</a></li>
+                                        <li *ngIf="pageNumber!=1"><a rel="next" href="javascript:void(0);" (click)="PageNumberChanged(pageNumber-1)">Previous</a></li>
+                    
+                                        <li *ngFor="let page of pageArray" [class.active]="page==pageNumber" [class.disabled]="page==0"><a *ngIf="(page!=0 && page!=pageNumber)"  href="javascript:void(0);" (click)="PageNumberChanged(page)">{{page}}</a>
+                                        <span  *ngIf="page==pageNumber">{{page}}</span>
+                                        <span  *ngIf="page==0">...</span>
+                                        </li>
+
+                                        
+                                        <li  *ngIf="pageNumber<totalPages-3" ><a rel="next" href="javascript:void(0);" (click)="PageNumberChanged(pageNumber+'+1')" >Next</a></li><li>
+                                        <li  *ngIf="pageNumber<totalPages-3" ><a rel="next" href="javascript:void(0);" (click)="PageNumberChanged(totalPages)">Last</a></li>
+                
+                                     </ul>
+                            </div>

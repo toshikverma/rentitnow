@@ -22,4 +22,8 @@ changeActive(n){
 this.activeTabNumber=n;
 
 }
+ColorChangedHandler(color:number)
+{
+  this.activeTabNumber = color;
+}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {CalendarModule} from 'primeng/primeng';
 import { ImageService } from "../../services/image.service";
 import { JwtHelper } from "angular2-jwt";
@@ -9,6 +9,9 @@ import { ReqService } from "../../services/request.service";
   styleUrls: ['./add-request.component.scss']
 })
 export class AddRequestComponent implements OnInit {
+  @Input() productChange:number;
+   @Output() ColorChanged = new EventEmitter();
+  saveDiabled: boolean;
   userDetails: any;
   jwtHelper: JwtHelper;
   errorValue: string;
@@ -21,51 +24,61 @@ export class AddRequestComponent implements OnInit {
 
   ngOnInit() {
     this.gotError=false;
+     this.saveDiabled=false;
     this.jwtHelper=new JwtHelper();
     this.userDetails= this.jwtHelper.decodeToken(localStorage.getItem("token"));
   }
   saveRequest(obj){
    this.gotError=false;
+   this.saveDiabled=true;
    console.log(this.imageArray);
    if(this.imageIsUploading){
      this.gotError=true;
       this.errorValue="Wait Image is Uploading!";
+      this.saveDiabled=false;
       return false;
    }
    if(this.imageArray.length<1){
       this.gotError=true;
       this.errorValue="Aleast One Image should be uploaded";
+      this.saveDiabled=false;
       return false;
     }
    if(obj.requestName=="" ||obj.requestName==null || obj.requestName==undefined){
      this.gotError=true;
      this.errorValue="Request Name Cannot be Empty!"
+     this.saveDiabled=false;
      return false;
    }
    if(obj.fromDate=="" ||obj.fromDate==null || obj.fromDate==undefined || !(obj.fromDate instanceof Date && !isNaN(obj.fromDate.valueOf()))){
      this.gotError=true;
      this.errorValue="From Date should be Date and Cannot be Empty!"
+     this.saveDiabled=false;
      return false;
    }
    if(obj.toDate=="" ||obj.toDate==null || obj.toDate==undefined || !(obj.toDate instanceof Date && !isNaN(obj.toDate.valueOf()))){
      this.gotError=true;
      this.errorValue="To Date should be Date and Cannot be Empty!"
+     this.saveDiabled=false;
      return false;
    }
    if(obj.fromDate>obj.toDate){
       this.gotError=true;
      this.errorValue="From Date cannot be Greater than to Date!"
+     this.saveDiabled=false;
      return false;
    }
    
    if((obj.referenceLink=="" ||obj.referenceLink==null || obj.referenceLink==undefined)){
      this.gotError=true;
      this.errorValue="Reference Link cannot be left Empty!"
+     this.saveDiabled=false;
      return false;
    }
    if((obj.description=="" || obj.description==null || obj.description==undefined) || (obj.description).length<50){
      this.gotError=true;
      this.errorValue="Description Link cannot be left Empty and greater than 50 characters!"
+     this.saveDiabled=false;
      return false;
    }
    if(this.imageArray[0]){
@@ -91,11 +104,14 @@ export class AddRequestComponent implements OnInit {
    }else{
      obj.image4="noimagefound";
    }
+   obj.userName=this.userDetails.fname+" "+this.userDetails.lname;
    obj.token=this.userDetails.token;
    obj.email=this.userDetails.email;
    console.log(obj);
+   obj.toDate= obj.toDate.toISOString();
+   obj.fromDate= obj.fromDate.toISOString();
    this.reqf.add(obj).subscribe(response=>{
-
+ this.ColorChanged.emit(7);
      console.log(response);
    });
   }

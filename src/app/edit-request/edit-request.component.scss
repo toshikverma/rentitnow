@@ -1,0 +1,14 @@
+#panel1,#panel2,#panel3,#panel4,{
+    width:100px;
+    height:100px;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
+#close{
+    display:block;
+    float:right;
+    width:30px;
+    height:29px;
+    background:url(/assets/images/close.png) no-repeat center center;
+}

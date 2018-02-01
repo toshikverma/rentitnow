@@ -1,36 +1,17 @@
-import {
-    Component,
-    OnInit,
-    ViewChild
-} from '@angular/core';
-import {
-    ProductService
-} from "../services/product.service";
-import {
-    JwtHelper
-} from "angular2-jwt/angular2-jwt";
-import {
-    DomSanitizer
-} from '@angular/platform-browser';
-import {
-    CategoryService
-} from "../services/category.service";
-import {
-    SubCategoryService
-} from "../services/sub-category.service";
-import {
-    ModalDirective
-} from 'ngx-bootstrap/modal';
-import {
-    ReasonsService
-} from "../services/reasons.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalDirective } from "ngx-bootstrap/modal";
+import { JwtHelper } from "angular2-jwt/angular2-jwt";
+import { ReqService } from "../../services/request.service";
+import { ReasonsService } from "../../services/reasons.service";
+import { AppError } from "../../common/app-error";
+import { NotFoundError } from "../../common/not-found-error";
 import { LoadingBarService } from '@ngx-loading-bar/core';
 @Component({
-    selector: 'app-approve-products',
-    templateUrl: './approve-products.component.html',
-    styleUrls: ['./approve-products.component.scss']
+  selector: 'app-manage-requests',
+  templateUrl: './manage-requests.component.html',
+  styleUrls: ['./manage-requests.component.scss']
 })
-export class ApproveProductsComponent implements OnInit {
+export class ManageRequestsComponent implements  OnInit{
     rejectIndex: number;
     reasonsArray: any;
     @ViewChild('child') child;
@@ -47,26 +28,27 @@ export class ApproveProductsComponent implements OnInit {
     linkAddress: any;
     userDetails: any;
     jwtHelper: JwtHelper;
-    posts: Array < any > = [];
-    pageN:any;
-    gotPageNumber:number;
+ gotPageNumber:number;
     gotTotalPages:number;
-    constructor(private loadingBar: LoadingBarService,private products: ProductService, private reasons: ReasonsService, private category: CategoryService, private subcat: SubCategoryService) {}
+    posts: Array < any > = [];
+
+    constructor(private loadingBar: LoadingBarService,private products: ReqService, private reasons: ReasonsService) {}
 
     ngOnInit() {
-        this.loadingBar.start();
-        this.category.getAll(this.obj).subscribe(response => {
-            this.categories = response.categories;
-        });
+         this.loadingBar.start();
         this.jwtHelper = new JwtHelper();
         this.userDetails = this.jwtHelper.decodeToken(localStorage.getItem("token"));
-        this.products.customQuery(this.userDetails.token + '/%7B %7D/lastEdit/1').subscribe(response => {
-            this.posts = response.products;
-           // console.log(response);
-            this.gotPageNumber=response.page;
+        this.products.customQuery(this.userDetails.token + '/%7B %7D/date/1').subscribe(response => {
+            this.posts = response.requests;
+             this.gotPageNumber=response.page;
             this.gotTotalPages=response.total_pages;
             this.loadingBar.complete();
-        });
+            this.posts.forEach(function (value) {
+    value.fromDate=new Date(value.fromDate);
+    value.toDate=new Date(value.toDate);
+       
+      });
+     });
         this.reasons.getAll({}).subscribe(response => {
             this.reasonsArray = response.cities;
         });
@@ -121,39 +103,7 @@ export class ApproveProductsComponent implements OnInit {
 
 
     }
-    loadSubCategories(post, id, i) {
-
-        this.products.assigncategory({
-            _id: post._id,
-            email: this.userDetails.email,
-            token: this.userDetails.token,
-            category: id
-        }).subscribe(response => {
-
-            console.log(response);
-        });
-        this.subcat.getAll({
-            category: id
-        }).subscribe(response => {
-            console.log(response);
-            this.subcategories[i] = response.subCategories;
-        });
-    }
-    changeSubCategories(post, id) {
-
-        if (id == null || id == undefined || id == "") {} else {
-            console.log(id)
-            this.products.assignsubcategory({
-                _id: post._id,
-                email: this.userDetails.email,
-                token: this.userDetails.token,
-                subcategory: id
-            }).subscribe(response => {
-
-                console.log(response);
-            });
-        }
-    }
+  
     changeProductId(id) {
         this.prodId = id;
     }
@@ -215,8 +165,8 @@ export class ApproveProductsComponent implements OnInit {
         }
 
     }
-      imageName(original_name){
-         if(original_name!="noimagefound" && original_name!="" && original_name!=undefined ){
+    imageName(original_name){
+          if(original_name!="noimagefound" && original_name!="" && original_name!=undefined && original_name!=null ){
 var fileExt = original_name.split('.').pop();
 original_name=original_name.substr(0,original_name.length- fileExt.length);
 original_name+="jpg";
@@ -224,7 +174,46 @@ return original_name;
          }
          return original_name;
     }
-    changePage(n:number){
+     ClickDelete(post){
+    if(confirm("Are you sure to delete ")) {
+        let index=this.posts.indexOf(post);
+    this.posts.splice(index,1);
+    this.products.delete(post._id,this.userDetails.token,this.userDetails.email).subscribe(response=>{
+console.log(response);
+},(error:AppError)=>{
+  this.posts.splice(index,0,post);
+  
+  if(error instanceof NotFoundError){
+    alert('This Post is already deleted!');
+  }else{
+    throw error;
+  }
+}
+
+);
+  }
+}
+ClickHold(post){
+
+     this.products.togglehold(post._id,{email:this.userDetails.email,token:this.userDetails.token}).subscribe(response=>{
+console.log(response);
+if(post.onHold==0){
+      post.onHold=1;
+  }else{
+      post.onHold=0;
+  }
+},(error:AppError)=>{
+  
+  if(error instanceof NotFoundError){
+    alert('This Post is already deleted!');
+  }else{
+    throw error;
+  }
+}
+
+);
+}
+ changePage(n:number){
        this.loadingBar.start();
         console.log("parent : "+n);
         this.products.customQuery(this.userDetails.token + '/%7B %7D/lastEdit/'+n).subscribe(response => {

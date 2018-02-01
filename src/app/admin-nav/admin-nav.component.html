@@ -7,8 +7,12 @@
 					<li [class.active]="activeTabNumber==5" (click)="changeActive(5)"><a href="javascript:void(0)" data-toggle="tab">Add/Edit Category</a></li>
 					<li [class.active]="activeTabNumber==6" (click)="changeActive(6)"><a href="javascript:void(0)" data-toggle="tab">Add/Edit Sub  Category</a></li>
 					<li [class.active]="activeTabNumber==7" (click)="changeActive(7)"><a href="javascript:void(0)" data-toggle="tab">Approve Products</a></li>
+					<li [class.active]="activeTabNumber==8" (click)="changeActive(8)"><a href="javascript:void(0)" data-toggle="tab">Approve Requests</a></li>
 				</ul>
-				<div class="tab-content">
+				<div class="tab-content"  style="
+    margin-left: 14%;
+    width: 100%;
+">
 					<div *ngIf="activeTabNumber==1" [class.active]="activeTabNumber==1"  class="tab-pane active" id="home">                
 						<div class="">
 							<h1>Add or Edit City</h1>
@@ -51,6 +55,12 @@
 						 <div class="">
 							<h1>Approve Products</h1>
 							<app-approve-products></app-approve-products>
+							</div>
+					</div>
+					<div *ngIf="activeTabNumber==8" [class.active]="activeTabNumber==8"  class="tab-pane" id="contact"> 
+						 <div class="">
+							<h1>Approve Requests</h1>
+							<app-approve-request></app-approve-request>
 							</div>
 					</div>
 				</div>

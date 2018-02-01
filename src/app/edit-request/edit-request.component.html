@@ -1,17 +1,16 @@
-<div class="mrgn-ad-section">
 <div class="container-fluid advertise-bg">
-<div class="add-b0x">
-<div class="col-sm-9 col-md-9 ad-contact-us">
-    <div class="panel panel-default">
-              <div class="panel-body">
-              <form #f="ngForm" (ngSubmit)="saveRequest(f.value);">
+		<div class="add-b0x">
+			<div class="col-sm-12 col-md-12 ad-contact-us">
+				<div class="panel panel-default">
+					<div class="panel-body">
+              <form  *ngIf="productId" #f="ngForm" (ngSubmit)="saveRequest(productId._id,f.value);">
               <fieldset>
               <div class="col-md-12">
               <label class="control-label">Name Of Product</label>
                 <div class="form-group">
                   <div class="inputGroupContainer">
                     <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                      <input  name="requestName" ngModel placeholder="Name Of Product" class="form-control"  type="text">
+                      <input  name="requestName" [ngModel]="productId.requestName" placeholder="Name Of Product" class="form-control"  type="text">
                     </div>
                   </div>
                 </div>
@@ -21,7 +20,7 @@
                 <div class="form-group">
                   <div class="inputGroupContainer">
                     <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                      <p-calendar name="fromDate" [(ngModel)]="value1" class="form-control" [showIcon]="true"></p-calendar>
+                      <p-calendar name="fromDate" [(ngModel)]="productId.fromDate"  class="form-control" [showIcon]="true"></p-calendar>
                     </div>
                   </div>
                 </div>
@@ -31,7 +30,7 @@
                 <div class="form-group">
                   <div class="inputGroupContainer">
                     <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                      <p-calendar name="toDate" [(ngModel)]="value2" class="form-control" [showIcon]="true"></p-calendar>
+                      <p-calendar name="toDate"  [(ngModel)]="productId.toDate" class="form-control" [showIcon]="true"></p-calendar>
                     </div>
                   </div>
                 </div>
@@ -48,7 +47,7 @@
                                               [max]="4"
                                               [url]="'https://rentophila.herokuapp.com/v1/imageUpload'"
                                               [headers]="{Authorization: 'MyToken'}"
-                                              [extensions]="['jpg','png']"
+                                              [extensions]="['jpg','png','jpeg']"
                                               (uploadFinished)="onUploadFinished($event)"
                                               (removed)="onRemoved($event)"
                                               (uploadStateChanged)="onUploadStateChanged($event)"
@@ -58,12 +57,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div  class="col-md-12">
+                              <div *ngIf="productId.image1!='noimagefound'" [style.background]="'url(https://s3.ap-south-1.amazonaws.com/rentophilaimages/thumbnails/'+image_name(productId.image1)+')'" class="col-md-3" id="panel1" ><a (click)="delImage(1,productId.image1)" id="close" href="javascript:void(0);"></a></div> &nbsp;&nbsp;&nbsp;
+                               <div *ngIf="productId.image2!='noimagefound'" [style.background]="'url(https://s3.ap-south-1.amazonaws.com/rentophilaimages/thumbnails/'+image_name(productId.image2)+')'" class="col-md-3" style="margin-left:2%" id="panel2"><a (click)="delImage(2,productId.image2)" id="close" href="javascript:void(0);"></a></div>&nbsp;&nbsp;&nbsp;
+                                <div *ngIf="productId.image3!='noimagefound'" [style.background]="'url(https://s3.ap-south-1.amazonaws.com/rentophilaimages/thumbnails/'+image_name(productId.image3)+')'" class="col-md-3" style="margin-left:2%" id="panel3"><a (click)="delImage(3,productId.image3)" id="close" href="javascript:void(0);"></a></div>&nbsp;&nbsp;&nbsp;
+                                 <div *ngIf="productId.image4!='noimagefound'" [style.background]="'url(https://s3.ap-south-1.amazonaws.com/rentophilaimages/thumbnails/'+image_name(productId.image4)+')'" style="margin-left:2%" id="panel4"><a (click)="delImage(4,productId.image4)" id="close" href="javascript:void(0);"></a></div>&nbsp;&nbsp;&nbsp;
+                            </div>
                 <div class="col-md-6">
                 <label class="control-label">Reference Link</label>
                 <div class="form-group">
                   <div class="inputGroupContainer">
                     <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-link"></i></span>
-                      <input  name="referenceLink" ngModel placeholder="Reference Link" class="form-control"  type="text">
+                      <input  name="referenceLink" [ngModel]="productId.referenceLink" placeholder="Reference Link" class="form-control"  type="text">
                     </div>
                   </div>
                 </div>
@@ -71,7 +76,7 @@
                 <div class="col-md-12">
                                 <label class="control-label">Product Description </label>
                                 <div class="form-group">
-                                    <textarea name="description" ngModel class="form-control" rows="2" id="comment" placeholder="Product Description"></textarea>
+                                    <textarea name="description" [ngModel]="productId.description" class="form-control" rows="2" id="comment" placeholder="Product Description"></textarea>
                                 </div>
                             </div>
                 <div class="col-md-12">
@@ -101,12 +106,5 @@
             
             </div>
 </div>
-<div class="col-sm-3 col-md-3 advertise-sb-heading">
-  <div class="">
-  <img src="/assets/images/advertisement-banner2.jpg" alt="partner-bg">
-  </div>
-   
-      </div>
-
 </div>
 </div>

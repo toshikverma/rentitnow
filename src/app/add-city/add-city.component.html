@@ -4,7 +4,7 @@ type="text" class="form-control"></td><td><button (click)="addCity(cityName)" cl
 <tr *ngIf="gotError"><td><alert type="danger">
   <strong>Oh snap!</strong> {{ errorValue }}
 </alert></td></tr></table>
-<ul class="list-group" style="margin-left: 195px;">
+<ul class="list-group" >
   <li 
   *ngFor="let post of posts;let i = index;"
   class="list-group-item">

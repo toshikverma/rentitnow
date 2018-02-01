@@ -6,19 +6,25 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs custom-tab" role="tablist">
-    <li role="presentation" [class.active]="activeTabNumber==1" (click)="changeActive(1)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-home icon"></i><span class="link-lable"> Manage Posts</span></a></li>
+    <li role="presentation" [class.active]="activeTabNumber==1" (click)="changeActive(1)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-download"></i><span class="link-lable"> Manage Products</span></a></li>
+    <li role="presentation" [class.active]="activeTabNumber==7" (click)="changeActive(7)"><a href="javascript:void(0)" data-toggle="tab"><i  class="glyphicon glyphicon-upload"></i><span class="link-lable"> Manage Requests</span></a></li>
    <li role="presentation" [class.active]="activeTabNumber==2" (click)="changeActive(2)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-envelope"></i><span class="link-lable"> Messages</span></a></li>
     <li role="presentation" [class.active]="activeTabNumber==3" (click)="changeActive(3)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-user"></i><span class="link-lable"> Profile</span></a></li>
 	
     <li role="presentation" [class.active]="activeTabNumber==4" (click)="changeActive(4)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-pencil"></i><span class="link-lable"> Edit Profile</span></a></li>
-    <li role="presentation" [class.active]="activeTabNumber==5" (click)="changeActive(5)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-download"></i><span class="link-lable">Add Item For Rent</span></a></li>
+    <li role="presentation" [class.active]="activeTabNumber==5" (click)="changeActive(5)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-download"></i><span class="link-lable"> Add Item For Rent</span></a></li>
     <li role="presentation" [class.active]="activeTabNumber==6" (click)="changeActive(6)"><a href="javascript:void(0)" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i><span class="link-lable"> Add Request</span></a></li>
   </ul>
 
 <div class="tab-content">
   <div role="tabpanel"  *ngIf="activeTabNumber==1" id="home">
-	<h2>Your Posts</h2>
- <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>
+	<h2>Your Products</h2>
+  <app-manage-products></app-manage-products>
+  </div>
+ <div role="tabpanel"  *ngIf="activeTabNumber==7" id="home">
+	<h2>Your Requests</h2>
+ <app-manage-requests></app-manage-requests>
+ </div>
   <div role="tabpanel"  *ngIf="activeTabNumber==2" id="messages"><h2>Tab 2</h2>
  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>
   <div role="tabpanel" *ngIf="activeTabNumber==3" id="settings"><h2>Tab 3</h2>
@@ -28,10 +34,10 @@
  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>
 
 <div role="tabpanel"  *ngIf="activeTabNumber==5" id="test5"><h2>Add Item For Rent</h2>
-   <app-add-product></app-add-product></div>
+   <app-add-product (ColorChanged)="ColorChangedHandler($event)" ></app-add-product></div>
 
 <div role="tabpanel"  *ngIf="activeTabNumber==6" id="test5"><h2>Add Request</h2>
- <app-add-request></app-add-request></div>
+ <app-add-request (ColorChanged)="ColorChangedHandler($event)"></app-add-request></div>
 </div>
 
 

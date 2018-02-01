@@ -51,6 +51,11 @@ search(obj) {
       .map(response => response.json())
       .catch(this.handleError);
   }
+  togglehold(id,obj) {
+    return this.http.put(this.url+"/togglehold/"+ id,obj)
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
  demote(id,obj) {
     return this.http.put(this.url+"/demote/"+ id,obj)
       .map(response => response.json())
@@ -75,6 +80,18 @@ search(obj) {
   }
   rejectLink(obj){
     return this.http.put(this.url+"/rejectlink/"+obj._id,obj);
+  }
+   assigncategory(obj){
+    return this.http.put(this.url+"/assigncategory/"+obj._id,obj);
+  }
+   assignsubcategory(obj){
+    return this.http.put(this.url+"/assignsubcategory/"+obj._id,obj);
+  }
+  rejectProduct(obj){
+    return this.http.put(this.url+"/rejectproduct/"+obj._id,obj);
+  }
+  approveProduct(obj){
+    return this.http.put(this.url+"/approveproduct/"+obj._id,obj);
   }
   private handleError(error: Response) {
     if (error.status === 400)
