@@ -2,7 +2,7 @@
 (keyup.enter)="addCollege(collegeName,cityID)" #collegeName
 type="text" class="form-control"></td>
 <td>
-  <select #cityID ng-change="loadColleges()"  [ngModel]="selectedItem" (ngModelChange)="loadColleges(cityID.value)">
+  <select #cityID ng-change="loadColleges()"  ngModel (ngModelChange)="loadColleges(cityID.value)">
 <option  *ngFor="let city of cities;let i = index;"
 value="{{city._id}}">{{city.name}}</option>
 

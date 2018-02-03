@@ -8,7 +8,6 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
-@Injectable()
 export  class DataService {
   constructor(private url: string, private http: Http) { }
 

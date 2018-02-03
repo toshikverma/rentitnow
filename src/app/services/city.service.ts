@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CityService extends DataService {
   constructor(http: Http) {
-    super("https://rentophila.herokuapp.com/v1/city", http);
+    super('https://rentophila.herokuapp.com/v1/city', http);
    }
 }

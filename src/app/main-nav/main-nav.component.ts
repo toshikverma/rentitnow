@@ -10,9 +10,9 @@ import { JwtHelper } from "angular2-jwt";
 export class MainNavComponent implements OnInit {
   errorValue: any;
   gotError: boolean;
-  private invalidLogin: boolean;
-  private initialLogin: boolean;
-  private temp:String[];
+   invalidLogin: boolean;
+   initialLogin: boolean;
+   temp:String[];
   constructor(private auth:AuthService,
   private router:Router) { }
 

@@ -5,7 +5,7 @@
 (keyup.enter)="addSubCategory(subCategoryName,categoryID)" #subCategoryName
 type="text" class="form-control"></td>
 <td>
-  <select #categoryID ng-change="loadSubCategories()"  [ngModel]="selectedItem" (ngModelChange)="loadSubCategories(categoryID.value)">
+  <select #categoryID ng-change="loadSubCategories()"  ngModel (ngModelChange)="loadSubCategories(categoryID.value)">
 <option  *ngFor="let category of categories;let i = index;"
 value="{{category._id}}">{{category.name}}</option>
 

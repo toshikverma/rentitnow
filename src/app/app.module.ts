@@ -97,7 +97,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
       { path: '**', component: NotFoundComponent }
     ])
   ],
-  providers: [ReqService,ImageService,ProductService,AdminAuthGaurd,AuthGaurd,SubCategoryService,CategoryService,UserService,ReasonsService,CollegeService,CityService,DataService,AuthService,{
+  providers: [ReqService,ImageService,ProductService,AdminAuthGaurd,AuthGaurd,SubCategoryService,CategoryService,UserService,ReasonsService,CollegeService,CityService,AuthService,{
     provide: ErrorHandler, 
     useClass: AppErrorHandler
   }],
