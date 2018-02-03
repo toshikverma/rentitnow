@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export abstract  class DataService {
+export  class DataService {
   constructor(private url: string, private http: Http) { }
 
   getAll(obj) {
