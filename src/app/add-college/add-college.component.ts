@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CollegeService } from "../services/college.service";
 import { NotFoundError } from "../common/not-found-error";
 import { AppError } from "../common/app-error";
@@ -14,7 +14,7 @@ export class AddCollegeComponent implements OnInit {
   userDetails: any;
   jwtHelper: any;
 
-  constructor(@Inject(CollegeService) service: CollegeService,private city:CityService) { }
+  constructor(private service:CollegeService,private city:CityService) { }
 posts:any[];
  obj:object;
  cities:any[];
