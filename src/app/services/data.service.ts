@@ -16,6 +16,11 @@ export  class DataService {
       .map(response => response.json())
       .catch(this.handleError);
   }
+  getsingle(id) {
+    return this.http.get(this.url+"/singleproduct/"+id)
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
     customQuery(query) {
       console.log(this.url+"/dynamic/"+query);
     return this.http.get(this.url+"/dynamic/"+query)

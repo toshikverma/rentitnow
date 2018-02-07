@@ -23,25 +23,25 @@
                                     <td class="col-md-1"> {{post.userName}}</td>
                                     <td class="col-md-4">  {{post.productName}}</td>
                                    
-                                    <td> <select #categoryID   [ngModel]="post.category" (ngModelChange)="loadSubCategories(post,categoryID.value,i)">
+                                    <td> <select #categoryID   [ngModel]="post.category+'|'+post.categoryName" (ngModelChange)="loadSubCategories(post,categoryID.value,i)">
 
 <option  *ngFor="let category of categories;"
-value="{{category._id}}" >{{category.name}}</option>
+value="{{category._id+'|'+category.name}}" >{{category.name}}</option>
 
 
   </select></td>
                                     <td class="col-md-1">
                                       <button *ngIf="!subcategories[i] && post.subcategory" type="button"  (click)="loadSubCategories(post,categoryID.value,i)" class="btn btn-info btn-sm" data-toggle="tooltip" title="Edit Post">Get</button>
-                                      <select #subcategoryID *ngIf="subcategories[i]" #subCategoryID [ngModel]="post.subcategory" (ngModelChange)="changeSubCategories(post,subcategoryID.value)">
+                                      <select #subcategoryID *ngIf="subcategories[i]" #subCategoryID [ngModel]="post.subcategory+'|'+post.subcategoryName" (ngModelChange)="changeSubCategories(post,subcategoryID.value)">
                                         
 <option  *ngFor="let subcategory of subcategories[i];"
-value="{{subcategory._id}}">{{subcategory.name}}</option>
+value="{{subcategory._id+'|'+subcategory.name}}">{{subcategory.name}}</option>
 
 
   </select>
                                     </td>
                                     <td class="col-md-3" >
-                                      <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title="Post Link"><i class="fa fa-link" aria-hidden="true"></i></button>
+                                      <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title="Post Link"><a href="/product/{{post._id}}/name" target="_blank" ><i class="fa fa-link" aria-hidden="true"></i></a></button>
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" (click)="changeProductId(post); lgModal2.show(); clearingOldImages();" title="Edit Post"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                     <button type="button" class="btn  btn-sm" data-toggle="tooltip" [class.btn-warning]="post.productApproved!=2" [class.btn-danger]="post.productApproved==2" [disabled]="post.productApproved==2" (click)="lgModal3.show();rejectSetUp(i);" title="Reject Post"><i class="fa fa-times" aria-hidden="true"></i> </button>
                                     <button type="button" class="btn btn-warning " data-toggle="tooltip" [class.btn-warning]="post.productApproved!=1" [class.btn-success]="post.productApproved==1" [disabled]="post.productApproved==1" (click)="approveProduct(post)" title="Approve Post"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> </button>

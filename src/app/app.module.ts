@@ -50,6 +50,9 @@ import { ManageProductsComponent } from './profileWorks/manage-products/manage-p
 import { ManageRequestsComponent } from './profileWorks/manage-requests/manage-requests.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { ProductSingleComponent } from './product-single/product-single.component';
+import { NgxCarouselModule } from 'ngx-carousel';
+import 'hammerjs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,11 +78,13 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     EditRequestComponent,
     ManageProductsComponent,
     ManageRequestsComponent,
-    PaginationComponent
+    PaginationComponent,
+    ProductSingleComponent
   ],
   imports: [HttpModule,
     HttpClientModule,
     FormsModule,
+    NgxCarouselModule,
     BrowserAnimationsModule,
     BrowserModule,
     AngularFontAwesomeModule,
@@ -93,6 +98,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
      { path: '', component: HomeComponent },
       { path: 'admin', component: AdminComponent,canActivate:[AdminAuthGaurd]},
        { path: 'profile', component: ProfileComponent},
+       { path: 'product/:id/:name', component: ProductSingleComponent},
          { path: 'accessdenied', component: NoAccessComponent},
       { path: '**', component: NotFoundComponent }
     ])

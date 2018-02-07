@@ -1,0 +1,206 @@
+<ngx-loading-bar></ngx-loading-bar>
+<app-main-nav></app-main-nav>
+<section class="mrgn-top">
+	<div class="container-fluid">
+        <div class="row">
+        	<div class="col-sm-12 col-md-12">
+        		<div class="col-sm-3 col-md-3 logo">
+           		 <a href="index.php"><img src="assets/images/logo.jpg" alt="logo" /></a>
+                 </div>
+                 <div class="col-sm-5 col-md-5 logo-sectn-content width advertise-heading">
+     				<h1> Product</h1>
+                 </div>
+           		<!--<div class="col-sm-3 col-md-3 hidden-xs search-mrgn">
+                <form id="search-box">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <div class="input-group-btn">
+                      <button class="btn btn-default" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+                </div>-->
+          </div>
+        </div>
+    </div>
+</section>
+<!--End Header-->
+
+<section>
+  <div class="container">
+  <div class="row">
+  <div class="col-md-12">
+  <ul class="breadcrumb">
+<li><a href="#">Home</a></li>
+<li><a href="#">{{categoryName}}</a></li>
+<li class="active">{{subcategoryName}}</li>
+</ul>
+  </div>
+    <div class="col-md-9 col-sm-12 col-xs-12 prod-full-detail">
+      <div class="panel panel-default">
+  <div class="panel-body">
+  <div class="col-md-4 col-sm-4 col-xs-4">
+          <div > 
+            
+
+            <ngx-carousel
+        [inputs]="carouselOne"
+        (carouselLoad)="myfunc($event)">
+          <ngx-item NgxCarouselItem *ngIf="image1!='noimagefound'">
+           <img  class="img-fluid" height="300px" src="https://s3.ap-south-1.amazonaws.com/rentophilaimages/{{image1}}" alt="product2">
+          </ngx-item>
+          <ngx-item NgxCarouselItem *ngIf="image2!='noimagefound'">
+           <img  class="img-fluid" height="300px" src="https://s3.ap-south-1.amazonaws.com/rentophilaimages/{{image2}}" alt="product2">
+          </ngx-item>
+          <ngx-item NgxCarouselItem *ngIf="image3!='noimagefound'">
+           <img  class="img-fluid" height="300px" src="https://s3.ap-south-1.amazonaws.com/rentophilaimages/{{image3}}" alt="product2">
+          </ngx-item>
+          <ngx-item NgxCarouselItem *ngIf="image4!='noimagefound'">
+           <img  class="img-fluid" height="300px" src="https://s3.ap-south-1.amazonaws.com/rentophilaimages/{{image4}}" alt="product2">
+          </ngx-item>
+          
+          <button  NgxCarouselPrev class='leftRs'>&gt;</button>
+          <button  NgxCarouselNext class='rightRs'>&gt;</button>
+    </ngx-carousel>
+            
+            <!--<a class="left carousel-control" href="#carousel-custom" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#carousel-custom" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> <span class="sr-only">Next</span> </a> --></div>
+          <div class="prod-price">
+            <div class="col-md-6 col-sm-6 col-xs-12 rent-price">
+              <h5> <strong>Rent Price</strong> <i class="fa fa-inr" aria-hidden="true"> {{rentPerAmount}} {{rentTimeType}}</i></h5>
+              </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 security-price">
+              <h5> <strong>Security Deposit</strong><i class="fa fa-inr" aria-hidden="true">{{securityAmount}}</i> </h5>
+              </div>
+          </div>
+          
+        <div class="col-md-5 col-sm-6 col-xs-12">
+          <button class="offer-btn"><i class="fa fa-gavel" aria-hidden="true"></i> Offer Bid</button>
+        </div>
+        <div class="col-md-7 col-sm-6 col-xs-12">
+          <button class="chat-renter"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat With Renter</button>
+        </div>
+        
+          
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-8">
+          <div class="prod-box">
+            <div class="prod-name">
+              <h2>{{prodName}}
+              <span><a href="#">{{pageView}} Hits</a></span></h2>
+            </div>
+            <div class="prod-date-time row">
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <h5> <strong>Added On</strong>{{dateAdded | date:"MMMM d, y"}} </h5>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-6 lv-meter">  <h5><strong>Love Meter</strong> <a href="#" id="love_meter"><i class="fa fa-heart-o" aria-hidden="true"></i> <span>{{wishlist}} </span></a></h5> 
+              </div>
+            </div>
+            <div class="prod-date-time row">
+             <div class="col-md-6 col-sm-6 col-xs-6">
+                <h5> <strong>Product Age</strong>{{productAge}} days </h5>
+              </div>
+            <div >
+            </div>
+             <div class="col-md-6 col-sm-6 col-xs-6">
+                <h5>
+                <strong>Upoaded by
+                  </strong> 
+                  
+                     {{userName}}
+                    
+                 </h5> 
+                    </div>
+              <div *ngIf="ratings!=0" class="col-md-6 col-sm-6 col-xs-6 rating">
+                <h5>
+                <strong>Product Rating
+                  </strong> 
+                  
+                    <i class="fa fa-star" aria-hidden="true"></i> {{ratings}}
+                    
+                 </h5> 
+                    </div>
+            </div>
+            <div class="prod-detail">
+              <p>{{discription}} </p>
+            </div>
+            <div class="prod-terms" >
+              <p>*Terms and Agreement</p>
+              <ul>
+                <li>Is Security Wanted?<span>{{security}}</span></li>
+                <li>How much security wanted?<span>{{securityAmount}}</span></li>
+                <li>Rent price <span>{{rentPerAmount}} {{rentTimeType}}</span></li>
+                <li>Condition<span>{{condition}}</span></li>
+              </ul>
+            </div>
+            <div class="social-share">
+             <a href="{{referenceLink}}" target="_blank" > <button class="btn btn-primary" > Reference Link</button></a>
+              
+            </div>
+          </div>
+        </div>
+        </div>
+        
+</div>
+    </div>
+    <div class="col-sm-3 col-md-3 col-xs-12">
+      <div class="advertise">
+        <img src="assets/images/advertisement-banner.jpg" alt="advertisement-banner">
+        <img src="assets/images/advertisement-banner.jpg" alt="advertisement-banner">
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 featured-ad-bg">
+        <h1 class="row-heading">Similar Items Suggestion</h1>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+          <div class="featured-ad-description"> <a href="javascript:void(0);"> <img src="assets/images/product1.jpg" alt="product1">
+            <div class="featured-bottom">
+              <h3>Lenevo</h3>
+              <div class="featured-bottom-btn">
+               
+                 <button>See Details</button>
+                
+              </div>
+            </div>
+            </a> </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+          <div class="featured-ad-description"> <a href="javascript:void(0);"> <img src="assets/images/product2.jpg" alt="product2">
+            <div class="featured-bottom">
+              <h3>Panasonic</h3>
+              <div class="featured-bottom-btn">
+                
+              </div>
+            </div>
+            </a> </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+          <div class="featured-ad-description"> <a href="javascript:void(0);"> <img src="assets/images/product3.jpg" alt="product3">
+            <div class="featured-bottom">
+              <h3>Samsung</h3>
+              <div class="featured-bottom-btn">
+                
+              </div>
+            </div>
+            </a> </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+          <div class="featured-ad-description"> <a href="javascript:void(0);"><img src="assets/images/product4.jpg" alt="product4">
+            <div class="featured-bottom">
+              <h3>Blackberry</h3>
+              <div class="featured-bottom-btn">
+               
+              </div>
+            </div>
+            </a> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -122,18 +122,20 @@ export class ApproveProductsComponent implements OnInit {
 
     }
     loadSubCategories(post, id, i) {
-
+ let valueArray=id.split('|');
+ console.log(valueArray)
         this.products.assigncategory({
             _id: post._id,
             email: this.userDetails.email,
             token: this.userDetails.token,
-            category: id
+            category: valueArray[0],
+            name:valueArray[1]
         }).subscribe(response => {
 
             console.log(response);
         });
         this.subcat.getAll({
-            category: id
+            category: valueArray[0]
         }).subscribe(response => {
             console.log(response);
             this.subcategories[i] = response.subCategories;
@@ -143,11 +145,13 @@ export class ApproveProductsComponent implements OnInit {
 
         if (id == null || id == undefined || id == "") {} else {
             console.log(id)
+            let valueArray=id.split('|');
             this.products.assignsubcategory({
                 _id: post._id,
+                name:valueArray[1],
                 email: this.userDetails.email,
                 token: this.userDetails.token,
-                subcategory: id
+                subcategory: valueArray[0]
             }).subscribe(response => {
 
                 console.log(response);
