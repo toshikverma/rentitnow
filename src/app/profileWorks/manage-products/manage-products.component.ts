@@ -39,7 +39,7 @@ export class ManageProductsComponent implements OnInit{
           this.loadingBar.start();
         this.jwtHelper = new JwtHelper();
         this.userDetails = this.jwtHelper.decodeToken(localStorage.getItem("token"));
-        this.products.customQuery(this.userDetails.token + '/%7B %7D/date/1').subscribe(response => {
+        this.products.customQuery(this.userDetails.token + '/%7B "userId"%3A"'+this.userDetails._id+'" %7D/lastEdit/1').subscribe(response => {
             this.posts = response.products;
              this.gotPageNumber=response.page;
             this.gotTotalPages=response.total_pages;
@@ -212,10 +212,8 @@ if(post.onHold==0){
  changePage(n:number){
        this.loadingBar.start();
         console.log("parent : "+n);
-        this.products.customQuery(this.userDetails.token + '/%7B %7D/lastEdit/'+n).subscribe(response => {
+        this.products.customQuery(this.userDetails.token +  '/%7B "userId"%3A"'+this.userDetails._id+'" %7D/lastEdit/'+n).subscribe(response => {
             this.posts = response.products;
-           // console.log(response);
-           console.log(this.userDetails.token + '/%7B %7D/lastEdit/'+n);
             this.gotPageNumber=response.page;
             this.gotTotalPages=response.total_pages;
             this.loadingBar.complete();

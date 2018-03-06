@@ -76,7 +76,7 @@
           </div>
           
         <div class="col-md-5 col-sm-6 col-xs-12">
-          <button class="offer-btn"><i class="fa fa-gavel" aria-hidden="true"></i> Offer Bid</button>
+          <button class="offer-btn" (click)="lgModal.show();"><i class="fa fa-gavel" aria-hidden="true"></i> Offer Bid</button>
         </div>
         <div class="col-md-7 col-sm-6 col-xs-12">
           <button class="chat-renter"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat With Renter</button>
@@ -94,7 +94,7 @@
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <h5> <strong>Added On</strong>{{dateAdded | date:"MMMM d, y"}} </h5>
               </div>
-              <div class="col-md-6 col-sm-6 col-xs-6 lv-meter">  <h5><strong>Love Meter</strong> <a href="#" id="love_meter"><i class="fa fa-heart-o" aria-hidden="true"></i> <span>{{wishlist}} </span></a></h5> 
+              <div class="col-md-6 col-sm-6 col-xs-6 lv-meter">  <h5><strong>Love Meter</strong><i (click)="heartClicked()" class="fa fa-heart-o" aria-hidden="true"></i> <span>{{wishlist}} </span></h5> 
               </div>
             </div>
             <div class="prod-date-time row">
@@ -109,6 +109,7 @@
                   </strong> 
                   
                      {{userName}}
+                     
                     
                  </h5> 
                     </div>
@@ -204,3 +205,80 @@
     </div>
   </div>
 </section>
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Submit Bid</h4>
+        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+                                   <div class="modal-body">
+                                    <div class="container-fluid advertise-bg">
+		<div class="add-b0x">
+			<div class="col-sm-12 col-md-12 ad-contact-us">
+				<div class="panel panel-default">
+					<div class="panel-body">  
+                                    <form #f="ngForm"  (ngSubmit)="saveBid(f.value);">
+							<div class="col-md-6">
+								<label class="control-label">Amount per {{rentTimeType}} </label>
+								<div class="form-group">
+									<div class="inputGroupContainer">
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-pencil"></i>
+											</span>
+											<input  name="amount" ngModel placeholder="Amount per {{rentTimeType}}" class="form-control"  type="text">
+											</div>
+										</div>
+									</div>
+								</div>
+                            <div class="col-md-6">
+                                <label class="control-label">Renting period </label>
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </span>
+                                            <input ngModel name="days" placeholder="Renting period in days" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            <div class="col-md-12">
+                                <label class="control-label">Bid Description </label>
+                                <div class="form-group">
+                                    <textarea ngModel  class="form-control" rows="2" id="comment" placeholder="Bid Description Optional" name="description"></textarea>
+                                </div>
+                            </div>
+												
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="inputGroupContainer">
+                                      <alert *ngIf="gotError" type="danger">
+  <strong>Oh snap!</strong> {{ errorValue }}
+</alert>
+                                        <button [disabled]="saveDiabled" type="submit" class="btn btn-warning newbtn " name="submit" >Send 
+                                            <span class="fa fa-send"></span>
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+					</div></div></div></div></div>
+                                       
+                                    </div>
+      </div>
+    </div>
+  </div></div>

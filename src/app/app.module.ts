@@ -53,6 +53,12 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { ProductSingleComponent } from './product-single/product-single.component';
 import { NgxCarouselModule } from 'ngx-carousel';
 import 'hammerjs';
+import { BidService } from "./services/bid.service";
+import { BidComponent } from "./profileWorks/bid/bid.component";
+import { ChatService } from "./services/chat.service";
+import { MessagesComponent } from './profileWorks/messages/messages.component';
+import { NotificationsComponent } from './profileWorks/notifications/notifications.component';
+import { NotificationService } from "./services/notification.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +85,10 @@ import 'hammerjs';
     ManageProductsComponent,
     ManageRequestsComponent,
     PaginationComponent,
-    ProductSingleComponent
+    ProductSingleComponent,
+    BidComponent,
+    MessagesComponent,
+    NotificationsComponent
   ],
   imports: [HttpModule,
     HttpClientModule,
@@ -97,13 +106,14 @@ import 'hammerjs';
      RouterModule.forRoot([
      { path: '', component: HomeComponent },
       { path: 'admin', component: AdminComponent,canActivate:[AdminAuthGaurd]},
-       { path: 'profile', component: ProfileComponent},
+         { path: 'profile', component: ProfileComponent},
+         { path: 'profile/:name', component: ProfileComponent},
        { path: 'product/:id/:name', component: ProductSingleComponent},
          { path: 'accessdenied', component: NoAccessComponent},
       { path: '**', component: NotFoundComponent }
     ])
   ],
-  providers: [ReqService,ImageService,ProductService,AdminAuthGaurd,AuthGaurd,SubCategoryService,CategoryService,UserService,ReasonsService,CollegeService,CityService,AuthService,{
+  providers: [NotificationService,ChatService,BidService,ReqService,ImageService,ProductService,AdminAuthGaurd,AuthGaurd,SubCategoryService,CategoryService,UserService,ReasonsService,CollegeService,CityService,AuthService,{
     provide: ErrorHandler, 
     useClass: AppErrorHandler
   }],

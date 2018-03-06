@@ -1,0 +1,102 @@
+<ngx-loading-bar></ngx-loading-bar>
+<div col-md-12>
+                   
+                                <table class="table table-bordered admin-table">
+                       		    	<thead>
+                                      <tr>
+                                        <th>S.No.</th>
+                                        <th>Message To</th>
+                  
+                                      
+                                        <th>Last message</th>
+                                         <th>Chat</th>
+                                      </tr>
+                        			</thead>
+    								
+  									<tbody>
+                                  <tr *ngFor ="let post of posts;let i=index;">
+                                    <td class="col-md-1"> {{(gotPageNumber-1)*12+i+1}}  </td>
+                                    
+                                    <td class="col-md-2"> {{getMessenger(post)}}</td>
+                                   
+                                    <td class="col-md-6">{{post.otherField}}</td>
+                                    
+                                    
+                                    <td class="col-md-1"><button type="button" (click)="  clickedChat(post); lgModal2.show();" class="btn btn-info  btn-sm" data-toggle="tooltip" title="" data-original-title="Start Chat"><i class="fa fa-comments-o" aria-hidden="true"></i> Start Chat </button></td>
+                                  </tr>
+    						</tbody>
+                            </table>
+                             <app-pagination *ngIf="gotPageNumber" [pageNumber]="gotPageNumber" [totalPages]="gotTotalPages" (callPageChange)="changePage($event)"></app-pagination>
+                            </div>
+                           <div bsModal #lgModal2="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+     
+      <div >
+        
+			<div >
+				<div>
+					<div >  
+     <div class="chat">
+      <div class="chat-header clearfix">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+        
+        <div class="chat-about">
+          <div class="chat-with">Chat with {{chatTo}}</div>
+          
+        </div>
+        <button type="button" class="close pull-right" (click)="lgModal2.hide()" aria-label="Close"><i class="fa fa-close"></i></button>
+      </div> <!-- end chat-header -->
+      
+      <div class="chat-history" #scrollMe [scrollTop]="scrollvalue">
+        <ul style="list-style: none;">
+          <div  *ngIf="chatLoading" class="loader"></div>
+          <div *ngIf="!chatLoading && chatData" >
+            <div *ngFor ="let chat of chatData;let i=index;">
+          <li *ngIf="!checkIfEqual(i)" class="clearfix">
+            <div class="message-data align-right">
+              <span class="message-data-time" >{{chat.time | date:"MMMM d, y" }}</span> &nbsp; &nbsp;
+              <span class="message-data-name" >{{myname}} </span> <i class="fa fa-circle me"></i>
+              
+            </div>
+            <div class="message other-message float-right">
+              {{chat.message}}
+            </div>
+          </li>
+          
+          <li  *ngIf="checkIfEqual(i)">
+            <div class="message-data">
+              <span class="message-data-name"><i class="fa fa-circle online"></i>{{chatTo}} </span>
+              <span class="message-data-time">{{chat.time | date:"MMMM d, y" }}</span>
+            </div>
+            <div class="message my-message">
+               {{chat.message}}
+            </div>
+          </li>
+          </div>
+          </div>
+          <div *ngIf="!chatData" class="message no-message ">
+              NO Chat Initiated Yet!
+            </div>
+          
+        </ul>
+        
+      </div> <!-- end chat-history -->
+      
+      <div class="chat-message clearfix">
+        <textarea #etxtSend name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3"></textarea>
+                
+        <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+        <i class="fa fa-file-image-o"></i>
+        
+        <button (click)="sendChat(etxtSend)">Send</button>
+
+      </div> <!-- end chat-message -->
+      
+    </div> <!-- end chat -->
+    
+  </div> <!-- end container -->
+				</div></div></div>
+
+    </div>
+  </div></div>

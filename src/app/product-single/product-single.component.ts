@@ -1,14 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgxCarousel } from 'ngx-carousel';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { ProductService } from "../services/product.service";
+import { BidService } from "../services/bid.service";
+import { JwtHelper } from "angular2-jwt/angular2-jwt";
+import { ModalDirective } from "ngx-bootstrap/modal";
 @Component({
   selector: 'app-product-single',
   templateUrl: './product-single.component.html',
   styleUrls: ['./product-single.component.scss']
 })
 export class ProductSingleComponent implements OnInit {
+  errorValue: string;
+  ErrorValue: string;
+  gotError: boolean;
   categoryName: any;
   category: any;
   subcategory: any;
@@ -32,7 +38,10 @@ export class ProductSingleComponent implements OnInit {
   pageView: any;
   productId: string;
 prodName:string;
-  constructor(private router:Router,private loadingBar: LoadingBarService, private activatedRoute: ActivatedRoute,private products: ProductService) {
+userDetails: any;
+    jwtHelper: JwtHelper;
+    @ViewChild('lgModal') lgModal2: ModalDirective;
+  constructor(private bid:BidService ,private router:Router,private loadingBar: LoadingBarService, private activatedRoute: ActivatedRoute,private products: ProductService) {
 
     
          this.productId=this.activatedRoute.snapshot.params['id'];
@@ -93,7 +102,7 @@ case 4:this.rentTimeType="Per Hour";
 break;
 default:
 this.rentTimeType="Per Day";
-
+ 
   }
   this.rentPerAmount=response.product.rentPerAmount;
 this.productAge=response.product.productAge;
@@ -118,10 +127,13 @@ this.condition="Okay";
    this.categoryName=response.product.categoryName;
   this.category=response.product.category;
    this.loadingBar.complete();
+   this.products.addview(response.product._id).subscribe();
     },err=>{
 
        this.router.navigate(['/notfound']);
     });
+     this.jwtHelper = new JwtHelper();
+        this.userDetails = this.jwtHelper.decodeToken(localStorage.getItem("token"));
   }
  
   public myfunc(event: Event) {
@@ -129,5 +141,32 @@ this.condition="Okay";
      // it is helps to load the data by parts to increase the performance of the app
      // must use feature to all carousel
   }
+heartClicked(){
+  console.log("heart clicked!")
+}
+saveBid(obj){
+   this.gotError=false;
+  obj.productName=this.prodName;
+obj.email=this.userDetails.email;
+obj.token=this.userDetails.token;
+obj.productId=this.productId;
+obj._id=this.userDetails._id;
+obj.userName=this.userDetails.fname+" "+this.userDetails.lname;
 
+  console.log(obj);
+ if(isNaN(obj.days) || obj.days=="" ||obj.days==null ||obj.days==undefined){
+    this.gotError=true;
+    this.errorValue="Product Age cannot be empty and should be a Number!"
+    return false;
+  }
+  if(isNaN(obj.amount) || obj.amount=="" ||obj.amount==null ||obj.amount==undefined){
+    this.gotError=true;
+    this.errorValue="Amount cannot be empty and should be a Number!"
+    return false;
+  }
+  this.bid.add(obj).subscribe(response=>{
+ 
+  this.lgModal2.hide();
+  });
+}
 }

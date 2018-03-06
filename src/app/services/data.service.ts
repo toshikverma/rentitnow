@@ -16,6 +16,11 @@ export  class DataService {
       .map(response => response.json())
       .catch(this.handleError);
   }
+  getAllChats(obj) {
+    return this.http.post(this.url+"/getAll",obj)
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
   getsingle(id) {
     return this.http.get(this.url+"/singleproduct/"+id)
       .map(response => response.json())
@@ -43,7 +48,11 @@ search(obj) {
       .map(response => response.json())      
       .catch(this.handleError);
   }
-
+addview(id){
+  return this.http.put(this.url+"/addview" + '/' + id,{})
+      .map(response => response.json())      
+      .catch(this.handleError);
+}
   delete(id,token,email) {
     return this.http.delete(this.url+"/delete" + '/' + id+'/'+token+'/'+email)
       .map(response => response.json())
