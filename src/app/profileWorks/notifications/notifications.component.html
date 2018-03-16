@@ -22,7 +22,7 @@
                                   <tr *ngFor ="let post of posts;let i=index;">
                                     <td class="col-md-1"> {{(gotPageNumber-1)*12+i+1}}  </td>
                                     
-                                    <td class="col-md-1">  {{gettype(post.type)}}</td>
+                                    <td class="col-md-1">  {{(post.type)}}</td>
                                    
                                     <td class="col-md-2">{{post.message}}</td>
                                     
@@ -31,7 +31,7 @@
                                     <td class="col-md-4">
                                    {{post.description}} </td>
                                    
-                                    <td *ngIf="showLink(post.type)" class="col-md-2"> <a href="{{linkHere}}" target="_blank"></a> </td>
+                                    <td *ngIf="showLink(post.type)" class="col-md-2"> <a href="{{linkHere}}" >Manage</a> </td>
                                    
                                     <td *ngIf="!showLink(post.type)" class="col-md-1"><button type="button" (click)="  clickedChat(post); lgModal2.show();" class="btn btn-info  btn-sm" data-toggle="tooltip" title="" data-original-title="Start Chat"><i class="fa fa-comments-o" aria-hidden="true"></i> Start Chat </button></td>
                                   <td class="col-md-1">{{post.time | date:"MMMM d, y"}}</td>

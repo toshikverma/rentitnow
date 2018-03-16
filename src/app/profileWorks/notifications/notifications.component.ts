@@ -10,7 +10,8 @@ import slugify from 'slugify';
   styleUrls: ['./notifications.component.scss']
 })
 export class NotificationsComponent implements OnInit {
-  myname: any;
+    linkHere: string;
+    myname: any;
     myid: any;
     chatData: any;
     chatLoading: boolean;
@@ -58,13 +59,9 @@ scrollvalue:any;
        this.myname=this.userDetails.fname+" "+this.userDetails.lname;
        // alert(JSON.stringify(post))
         
-        if(post.from==this.userDetails._id){
-         this.chatToId=post.towards;
-         this.chatTo=post.towardsName[0].fname+" "+post.towardsName[0].lname;
-        }else{
-            this.chatToId=post.from;
-            this.chatTo=post.fromName[0].fname+" "+post.fromName[0].lname;
-      }
+         this.chatToId=post.refId;
+         this.chatTo="blank";
+       
        
         this.chats.getAll({userId:this.chatToId,email:this.userDetails.email,token:this.userDetails.token}).subscribe(response=>{
 
@@ -122,8 +119,19 @@ return "Chats"
       return "Bidding"
     }
     showLink(n){
-if(n==1 || n==4 || n== 3)
-return true;
+if(n==1){
+    this.linkHere="profile/manage-product";
+    return true;
+}
+if(n==3){
+    this.linkHere="profile/manage-bids";
+    return true;
+}
+if(n==4){
+    this.linkHere="profile/manage-request";
+    return true;
+}
+
 
  return false;
     }

@@ -8,6 +8,7 @@ import { JwtHelper } from "angular2-jwt";
   styleUrls: ['./main-nav.component.scss']
 })
 export class MainNavComponent implements OnInit {
+  name: any;
   errorValue: any;
   gotError: boolean;
    invalidLogin: boolean;
@@ -19,6 +20,12 @@ export class MainNavComponent implements OnInit {
   ngOnInit() {
 this.initialLogin=true;
 this.gotError=false;
+
+if(this.auth.isLoggedIn()){
+  let jwtHelper=new JwtHelper();
+    let userDetails=jwtHelper.decodeToken(localStorage.getItem('token'));
+    this.name=userDetails.fname;
+}
  }
 
 status: { isopen: boolean } = { isopen: false };
